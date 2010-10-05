@@ -17,7 +17,7 @@ describe Package do
         lambda { Package.new }.should raise_error(ArgumentError)
       end
      
-      it 'should return a Linode instance' do
+      it 'should return a Package instance' do
         Package.new('firefox').class.should == Package
       end
 
