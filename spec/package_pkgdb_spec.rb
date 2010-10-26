@@ -15,6 +15,5 @@ describe 'Package::PkdgInterface' do
   it 'should use a cached copy of the file unless the file is stale'
  
   it 'should invalidate the cache when stale'
-
    
 end

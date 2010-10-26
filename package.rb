@@ -1,48 +1,28 @@
 
 class Package 
-  attr :owner
+  attr_reader :name, :owner, :branch
   def initialize(name)
     @name = name
     @owner = 'michael'
+    @branch = nil
   end
 end
-
 
 class Package::Branch
   def initialize(name)
   end
-
-  
-
-  def getOwner
-    File.open('format1.txt').each do |line|
-      line.strip!
-      if line[@name] != nil
-        if line['Fedora EPEL|']
-          @epelmaint = line.split('|')[3]
-          begin
-            @epelco = line.split('|')[5].split(',')
-          rescue
-            @epelco = nil
-          end
-        elsif line['Fedora|']
-          @maint = line.split('|')[3]
-          begin
-            @co = line.split('|')[5].split(',')
-          rescue
-            @co = nil
-          end
-        end
-      end
-    end
-  end
-
-  
 end
-
 
 class Package::PkgdbInterface
    def initialize(name)
      @name = name
    end
+
+   def remote_query
+   end
+   
+   def stale?
+   end
+
+   
 end

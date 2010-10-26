@@ -39,8 +39,6 @@ describe Package do
         lambda { @pkg.owner =  'mrtesty' }.should raise_error(NoMethodError)
      end
 
-     it 'should have a different owner'
-    
      it 'should have the an upstream version' 
    
      it 'should have one or more branches' 
