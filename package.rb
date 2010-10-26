@@ -5,14 +5,25 @@ class Package
  
   include Branch
 
-  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version
+  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :bugurl, :kojiurl
 
   def initialize(name)
     @name = name
     @gem_name = gem_name
     @pkgdburl = get_pkgdburl
+    @bugurl = get_bugurl
+    @kojiurl = get_kojiurl
     @upstream_version = get_upstream_version
     @branches = get_branch(name)
+  end
+
+
+  def get_kojiurl
+   "http://koji.fedoraproject.org/koji/search?type=package&match=glob&terms=#{name}"
+  end
+
+  def get_bugurl
+   "https://admin.fedoraproject.org/pkgdb/acls/bugs/#{name}"
   end
 
   def get_pkgdburl

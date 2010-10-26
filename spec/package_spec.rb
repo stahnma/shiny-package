@@ -22,7 +22,7 @@ describe Package do
       end
   end
 
-  describe 'a package' do
+  describe 'as an instance' do
       before(:each) do
         @pkg = Package.new('rubygem-rack')
       end
@@ -63,11 +63,22 @@ describe Package do
        @pkg.branches.has_key?('devel').should == true
      end
 
-     #it 'should have a listing of bugs for the package' 
+     it 'should have a listing of bugs for the package'  do 
+        @pkg.bugurl.should_not == nil
+        @pkg.bugurl.class.should == String
+        @pkg.bugurl.should =~ /http/
+     end
+
+     it 'should have a url for koji builds '  do 
+        @pkg.kojiurl.should_not == nil
+        @pkg.kojiurl.class.should == String
+        @pkg.kojiurl.should =~ /http/
+     end
+
 
   end
 
-  describe 'package branch' do 
+  describe 'branch' do 
     before(:each) do 
       @pkg = Package.new('rubygem-rails')
       @branch = 'devel'
@@ -98,7 +109,12 @@ describe Package do
     it 'should have a spec file URL in this branch'  do 
        @pkg.branches[@branch]['spec'].should =~ /http:/
     end
-    
-    
+
+    it 'should display Requires' 
+  
+    it 'should display BuildRequires'
+ 
+    it 'should display Provides'
+
   end
 end
