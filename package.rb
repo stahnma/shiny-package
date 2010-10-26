@@ -1,22 +1,22 @@
 
-
-#module Package; end
-require 'package_branch.rb'
+require 'branch'
 
 class Package
+ 
+  include Branch
 
-  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :psearch
+  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version
 
   def initialize(name)
     @name = name
     @gem_name = gem_name
     @pkgdburl = get_pkgdburl
     @upstream_version = get_upstream_version
-    @branches = PackageBranchSearch.new(@name)
+    @branches = get_branch(name)
   end
 
   def get_pkgdburl
-   "https://admin.fedoraproject.org/pkgdb/acls/name/#{@name}" 
+    "https://admin.fedoraproject.org/pkgdb/acls/name/#{@name}" 
   end
 
   def gem_name

@@ -74,30 +74,31 @@ describe Package do
     end
 
     it 'should have a branch name'   do 
-      @pkg.branches.branches.keys.size.should > 0
+      @pkg.branches.keys.size.should > 0
     end
  
     it 'should have a package version in this branch'  
 
     it 'should have an owner in this branch' do 
-       @pkg.branches.branches[@branch]['owner'].should_not == nil
+       @pkg.branches[@branch]['owner'].should_not == nil
     end
 
     it 'should have an owner that is a string' do 
-       @pkg.branches.branches[@branch]['owner'].class.should == String
+       @pkg.branches[@branch]['owner'].class.should == String
+    end
+
+    it 'should have an attribute co-maintainers'  do
+       @pkg.branches[@branch]['comaint'].class.should == Array 
     end
 
     it 'should have zero or more co-maintainers'  do
- 
+       @pkg.branches[@branch]['comaint'].size >= 0 
     end
 
-    it 'should have a spec file URL in this branch' 
+    it 'should have a spec file URL in this branch'  do 
+       @pkg.branches[@branch]['spec'].should =~ /http:/
+    end
     
-    it 'should have an owner' 
-
-    it 'should be allowed to query owner' 
-
-    it 'should not be allowed to set the owner' 
     
   end
 end
