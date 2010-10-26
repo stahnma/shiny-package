@@ -10,7 +10,7 @@ describe Package do
 
   describe 'when creating a new Package instance' do
       it 'should accept a name argument' do
-        lambda { Package.new('firefox') }.should_not raise_error(ArgumentError)
+        lambda { Package.new('rubygem-rack') }.should_not raise_error(ArgumentError)
       end
  
       it 'should require a name' do
@@ -18,7 +18,7 @@ describe Package do
       end
      
       it 'should return a Package instance' do
-        Package.new('firefox').class.should == Package
+        Package.new('rubygem-rack').class.should == Package
       end
   end
 
@@ -27,29 +27,39 @@ describe Package do
         @pkg = Package.new('rubygem-rack')
       end
 
-     it 'should have an owner' do 
-        @pkg.owner.should_not nil
+     it 'should have a gem name which is a string' do
+       @pkg.gem_name.class.should == String 
      end
 
-     it 'should be allowed to query owner' do
-        @pkg.owner.should_not nil
+     it 'should have a gem name' do
+       @pkg.gem_name.should == 'rack' 
      end
-
-     it 'should not be allowed to set the owner' do 
-        lambda { @pkg.owner =  'mrtesty' }.should raise_error(NoMethodError)
+     
+     it 'should have a gem name that is not equal to the package name' do
+       @pkg.gem_name.should_not == @pkg.name
      end
-
-     it 'should have the an upstream version' 
+     
+     it 'should have an upstream version'  do 
+       @pkg.upstream_version.should_not == nil
+     end
    
+     it 'should be an upstream version of 1.2.1 (for now)' do 
+       @pkg.upstream_version.should == '1.2.1'
+     end
+
+     it 'should have a pkgdburl' do 
+       @pkg.pkgdburl.should   =~ /http/i
+     end
+     
+     it 'should have a pkgdburl that is a string' do
+       @pkg.pkgdburl.class.should == String
+     end
+
      it 'should have one or more branches' 
   
-     it 'should have one owner' 
-  
-     it 'should have a branch named rawhide' 
+     it 'should have a devel branch' 
 
-     it 'should have a listing of bugs for the package' 
-
-     it 'should have a pkgdb url'
+     #it 'should have a listing of bugs for the package' 
 
   end
 
@@ -63,7 +73,19 @@ describe Package do
 
     it 'should have zero or more co-maintainers' 
 
-    it 'should have a spec file URL' 
+    it 'should have a spec file URL in this branch' 
+    
+    # it 'should have an owner' do 
+    #    @pkg.owner.should_not nil
+     #end
+
+    # it 'should be allowed to query owner' do
+    #    @pkg.owner.should_not nil
+     #end
+
+    # it 'should not be allowed to set the owner' do 
+    #    lambda { @pkg.owner =  'mrtesty' }.should raise_error(NoMethodError)
+     #end
     
   end
 end

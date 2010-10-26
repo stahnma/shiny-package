@@ -1,0 +1,8 @@
+* Abstract package to make it not only about ruby packages
+* create a caching layer for web look ups
+* mock out the web calls for specs
+* create some form of pre-load for web service data
+* Organize tests in any sort of sane way
+
+* All Views
+
