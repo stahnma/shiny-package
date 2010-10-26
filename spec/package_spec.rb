@@ -55,37 +55,49 @@ describe Package do
        @pkg.pkgdburl.class.should == String
      end
 
-     it 'should have one or more branches' 
+     it 'should have one or more branches'  do
+       @pkg.branches.size.should >= 0 
+     end
   
-     it 'should have a devel branch' 
+     it 'should have a devel branch'  do 
+       @pkg.branches.has_key?('devel').should == true
+     end
 
      #it 'should have a listing of bugs for the package' 
 
   end
 
   describe 'package branch' do 
+    before(:each) do 
+      @pkg = Package.new('rubygem-rails')
+      @branch = 'devel'
+    end
 
-    it 'should have a branch name' 
+    it 'should have a branch name'   do 
+      @pkg.branches.branches.keys.size.should > 0
+    end
  
-    it 'should have a package version in this branch' 
+    it 'should have a package version in this branch'  
 
-    it 'should have an owner in this branch' 
+    it 'should have an owner in this branch' do 
+       @pkg.branches.branches[@branch]['owner'].should_not == nil
+    end
 
-    it 'should have zero or more co-maintainers' 
+    it 'should have an owner that is a string' do 
+       @pkg.branches.branches[@branch]['owner'].class.should == String
+    end
+
+    it 'should have zero or more co-maintainers'  do
+ 
+    end
 
     it 'should have a spec file URL in this branch' 
     
-    # it 'should have an owner' do 
-    #    @pkg.owner.should_not nil
-     #end
+    it 'should have an owner' 
 
-    # it 'should be allowed to query owner' do
-    #    @pkg.owner.should_not nil
-     #end
+    it 'should be allowed to query owner' 
 
-    # it 'should not be allowed to set the owner' do 
-    #    lambda { @pkg.owner =  'mrtesty' }.should raise_error(NoMethodError)
-     #end
+    it 'should not be allowed to set the owner' 
     
   end
 end

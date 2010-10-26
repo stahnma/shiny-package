@@ -1,12 +1,18 @@
 
-class Package 
-  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version
+
+#module Package; end
+require 'package_branch.rb'
+
+class Package
+
+  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :psearch
+
   def initialize(name)
     @name = name
-    @branches = nil
     @gem_name = gem_name
     @pkgdburl = get_pkgdburl
     @upstream_version = get_upstream_version
+    @branches = PackageBranchSearch.new(@name)
   end
 
   def get_pkgdburl
@@ -17,14 +23,14 @@ class Package
     @name.gsub('rubygem-', '')
   end
 
-  def gem_cached?
-    File.stat('/tmp/gemlist')
+  def gem_cache
+    unless File.exists?('/tmp/gemlist')
+      %x{gem list -r > /tmp/gemlist}
+    end
   end
 
   def get_upstream_version
-    if gem_cached? == false
-      %x{gem list -r > /tmp/gemlist}
-    end 
+    gem_cache
     File.open('/tmp/gemlist').each do |line|
       next if line !~ /^#{@gem_name}\ /
          start = line.index '('
@@ -32,9 +38,6 @@ class Package
          return line[start+1..stop-1]
     end
   end
+
 end
 
-class Package::Branch
-  def initialize(name)
-  end
-end
