@@ -23,9 +23,10 @@ describe Package do
   end
 
   describe 'as an instance' do
-      before(:each) do
-        @pkg = Package.new('rubygem-rack')
-      end
+     before :all do
+       
+       @pkg = Package.new('rubygem-rack')
+     end
 
      it 'should have a gem name which is a string' do
        @pkg.gem_name.class.should == String 
@@ -55,14 +56,6 @@ describe Package do
        @pkg.pkgdburl.class.should == String
      end
 
-     it 'should have one or more branches'  do
-       @pkg.branches.size.should >= 0 
-     end
-  
-     it 'should have a devel branch'  do 
-       @pkg.branches.has_key?('devel').should == true
-     end
-
      it 'should have a listing of bugs for the package'  do 
         @pkg.bugurl.should_not == nil
         @pkg.bugurl.class.should == String
@@ -81,7 +74,16 @@ describe Package do
   describe 'branch' do 
     before(:each) do 
       @pkg = Package.new('rubygem-rails')
+      @pkg.fill_branch
       @branch = 'devel'
+    end
+
+    it 'should have one or more branches'  do
+      @pkg.branches.size.should >= 0 
+    end
+ 
+    it 'should have a devel branch'  do 
+      @pkg.branches.has_key?('devel').should == true
     end
 
     it 'should have a branch name'   do 
@@ -118,7 +120,7 @@ describe Package do
  
     it 'should display Provides'
    
-    it 'should be denoted when the package is in EL' 
+    it 'should have a source repo attribute' 
 
   end
 end

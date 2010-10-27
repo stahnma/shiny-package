@@ -14,6 +14,9 @@ class Package
     @bugurl = get_bugurl
     @kojiurl = get_kojiurl
     @upstream_version = get_upstream_version
+  end
+
+  def fill_branch
     @branches = get_branch(name)
   end
 
