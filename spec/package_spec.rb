@@ -90,6 +90,8 @@ describe Package do
  
     it 'should have a package version in this branch'  
 
+    it 'should have the koji tag for the version'
+
     it 'should have an owner in this branch' do 
        @pkg.branches[@branch]['owner'].should_not == nil
     end
@@ -115,6 +117,8 @@ describe Package do
     it 'should display BuildRequires'
  
     it 'should display Provides'
+   
+    it 'should be denoted when the package is in EL' 
 
   end
 end
