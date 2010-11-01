@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
@@ -13,8 +14,8 @@ task :migrate => :environment do
 end
 
 task :environment do
-  ActiveRecord::Base.establish_connection(YAML::load(File.open('database.yml')))
-  ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
+  ActiveRecord::Base.establish_connection(YAML::load(File.open('config/database.yml')))
+  ActiveRecord::Base.logger = Logger.new(File.open('log/database.log', 'a'))
 end
 
 desc 'Default: run specs.'
