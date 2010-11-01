@@ -1,6 +1,25 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper.rb')
 require 'package'
 
+
+def mock_rq
+  if branch == "devel" 
+    return {"repo"=>"devel-fedora-rawhide", "provides"=>["rubygem(rails) = 2.3.8", "rubygem-rails = 1:2.3.8-1.fc15"], "requires"=>["/usr/bin/ruby", "ruby(abi) = 1.8", "ruby(rubygems) >= 1.3.4", "rubygem(actionmailer) = 2.3.8", "rubygem(actionpack) = 2.3.8", "rubygem(activerecord) = 2.3.8", "rubygem(activeresource) = 2.3.8", "rubygem(activesupport) = 2.3.8", "rubygem(rake) >= 0.8.3"], "version"=>"2.3.8-1.fc15"}
+  elsif branch == "f14"
+    return {"repo"=>"f14-base", "provides"=>["rubygem(rails) = 2.3.8", "rubygem-rails = 1:2.3.8-1.fc14"], "requires"=>["/usr/bin/ruby", "ruby(abi) = 1.8", "ruby(rubygems) >= 1.3.4", "rubygem(actionmailer) = 2.3.8", "rubygem(actionpack) = 2.3.8", "rubygem(activerecord) = 2.3.8", "rubygem(activeresource) = 2.3.8", "rubygem(activesupport) = 2.3.8", "rubygem(rake) >= 0.8.3"], "version"=>"2.3.8-1.fc14"}
+  elsif branch == "f13"
+    return {"repo"=>"f13-base", "provides"=>["rubygem(rails) = 2.3.5", "rubygem-rails = 1:2.3.5-1.fc13"], "requires"=>["/usr/bin/ruby", "ruby(abi) = 1.8", "ruby(rubygems) >= 1.3.4", "rubygem(actionmailer) = 2.3.5", "rubygem(actionpack) = 2.3.5", "rubygem(activerecord) = 2.3.5", "rubygem(activeresource) = 2.3.5", "rubygem(activesupport) = 2.3.5", "rubygem(rake) >= 0.8.3"], "version"=>"2.3.5-1.fc13"}
+  elsif branch == "f12"
+    return {"repo"=>"f12-base", "provides"=>["rubygem(rails) = 2.3.4", "rubygem-rails = 1:2.3.4-2.fc12"], "requires"=>["/usr/bin/ruby", "ruby(abi) = 1.8", "ruby(rubygems) >= 1.3.4", "rubygem(actionmailer) = 2.3.4", "rubygem(actionpack) = 2.3.4", "rubygem(activerecord) = 2.3.4", "rubygem(activeresource) = 2.3.4", "rubygem(activesupport) = 2.3.4", "rubygem(rake) >= 0.8.3"], "version"=>"2.3.4-2.fc12"}
+  elsif branch == "el6"
+    return {"repo"=>"epel", "provides"=>["rubygem(rails) = 2.1.1", "rubygem-rails = 2.1.1-2.el5"], "requires"=>["/usr/bin/env", "/usr/bin/ruby", "ruby(rubygems) >= 1.1.1", "rubygem(actionmailer) = 2.1.1", "rubygem(actionpack) = 2.1.1", "rubygem(activerecord) = 2.1.1", "rubygem(activeresource) = 2.1.1", "rubygem(activesupport) = 2.1.1", "rubygem(rake) >= 0.7.2"], "version"=>"2.1.1-2.el5"}
+  elsif brnach == "el5"
+    return {"repo"=>"el5-epel-stable", "provides"=>["rubygem(rails) = 2.1.1", "rubygem-rails = 2.1.1-2.el5"], "requires"=>["/usr/bin/env", "/usr/bin/ruby", "ruby(rubygems) >= 1.1.1", "rubygem(actionmailer) = 2.1.1", "rubygem(actionpack) = 2.1.1", "rubygem(activerecord) = 2.1.1", "rubygem(activeresource) = 2.1.1", "rubygem(activesupport) = 2.1.1", "rubygem(rake) >= 0.7.2"], "version"=>"2.1.1-2.el5"} 
+  else 
+    return false
+  end
+end
+
 describe Package do
   describe 'as a class' do
     it 'should be able to create a new Package instance' do
