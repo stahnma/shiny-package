@@ -110,7 +110,7 @@ module Branch
 
     base_command = "repoquery -c repoquery.conf #{enables} "
     ver_command = "#{base_command} --qf '%{version}-%{release}' #{name}"
-    version = %x{#{ver_command}}
+    version = %x{#{ver_command}}.strip
     result['version'] = version
     req_command = "#{base_command} -q --requires #{name}"
     req = %x{#{req_command}}.gsub("\n", ", ").strip.chomp(',').split(',')
@@ -122,7 +122,9 @@ module Branch
     result['provides'] = prov
     repo_command = "#{base_command} --qf '%{repoid}' #{name}"
     result['repo'] = %x{#{repo_command}}.strip!
+    p result
     return result
+ 
   end
 
 end
