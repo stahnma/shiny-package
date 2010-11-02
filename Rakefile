@@ -14,6 +14,7 @@ task :migrate => :environment do
 end
 
 task :environment do
+  sh "mkdir -p log; touch log/database.log"
   ActiveRecord::Base.establish_connection(YAML::load(File.open('config/database.yml')))
   ActiveRecord::Base.logger = Logger.new(File.open('log/database.log', 'a'))
 end
