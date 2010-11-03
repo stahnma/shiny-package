@@ -112,6 +112,7 @@ module BranchFill
     ver_command = "#{base_command} --qf '%{version}-%{release}' #{name}"
     puts ver_command
     version = %x{#{ver_command}}.strip
+    puts "Version right now is #{version}"
     result['version'] = version
     req_command = "#{base_command} -q --requires #{name}"
     req = %x{#{req_command}}.gsub("\n", ", ").strip.chomp(',').split(',')
