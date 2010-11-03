@@ -10,8 +10,7 @@ module BranchFill
   end
 
   def get_spec_url(name, branch)
-    branch = branch.downcase
-    branch = branch.gsub('-', '')
+    branch = branch.downcase.delete('-')
     if branch != 'devel'
       branch = branch + '/'
     else 
@@ -111,6 +110,7 @@ module BranchFill
 
     base_command = "repoquery -c repoquery.conf #{enables} "
     ver_command = "#{base_command} --qf '%{version}-%{release}' #{name}"
+    puts ver_command
     version = %x{#{ver_command}}.strip
     result['version'] = version
     req_command = "#{base_command} -q --requires #{name}"

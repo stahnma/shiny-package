@@ -1,2 +1,36 @@
 
-<%= @a.upstream_version -%> 
+
+<table border=1>
+
+<tr>
+  <th>Package Name</th>
+  <th>&nbsp;</th>
+  <th>Gem Name</th>
+  <th>Upstream</th>
+  <% @iter.each do |i| -%> 
+    <th><%= i -%></th>
+  <% end -%>
+</tr>
+
+
+<% @packages.each do | pkg| -%>
+<tr> 
+  <td><%= pkg.name -%></td>
+  <td><a href="<%= pkg.upstream_url -%>"><img src=/images/rubygems.png alt="Upstream URL" title="Upstream URL"></a> </td>
+  
+  <td><%= pkg.gem_name -%></td>
+  <td><%= pkg.upstream_version -%></td>
+
+  <% @iter.each do |i| -%>
+    <% b = pkg.try(i, pkg.id) -%>
+    <% unless b.nil? -%>
+       <td><%= b.version -%></td>
+    <% else -%>
+       <td>&nbsp;</td>
+    <% end -%>
+  <% end -%>
+  
+  
+
+<% end -%>
+</table>

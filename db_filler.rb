@@ -22,13 +22,15 @@ h.name = a.name
 h.gem_name = a.gem_name
 h.pkgdb_url = a.pkgdburl
 h.upstream_version = a.upstream_version
-h.save
+h.upstream_url = a.upstream_url
+h.save!
 
 a.fill_branch
 id = Package.find_by_name(name).id
 p a.branches
 p a.branches.class
 a.branches.each_key do |key| 
+  puts "Working with key #{key}"
   # First look to see if I can find existing branch of package
   b = Branch.find_by_package_id_and_branch(id, key)
   unless  b 
@@ -40,6 +42,7 @@ a.branches.each_key do |key|
   b.repo = hsh['repo'].to_s
   b.provides = hsh['provides'].join('^') if hsh['provides'].is_a?(Array)
   b.requires = hsh['requires'].join('^') if hsh['requires'].is_a?(Array)
+  puts "Setting version #{hsh['version'].to_s}"
   b.version = hsh['version'].to_s
   b.owner = hsh['owner'].to_s
   b.comaint = hsh['comaint'].join('^') if hsh['comint'].is_a?(Array)
@@ -51,8 +54,7 @@ end
 end
 
 
-#names = [ 'rubygem-rake', 'rubygem-rails', 'rubygem-activesupport', 'rubygem-RedCloth', 'rubygem-shoulda', 'rubygem-crack' ]
-names =  [ 'rubygem-linode' ] 
+names = [ 'rubygem-RedCloth'  ]
 
 names.each do | name|
   do_the_needful(name)

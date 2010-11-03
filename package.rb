@@ -5,7 +5,7 @@ class PackageFill
  
   include BranchFill
 
-  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :bugurl, :kojiurl
+  attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :bugurl, :kojiurl, :upstream_url
 
   def initialize(name)
     @name = name
@@ -14,12 +14,17 @@ class PackageFill
     @bugurl = get_bugurl
     @kojiurl = get_kojiurl
     @upstream_version = get_upstream_version
+    @upstream_url = get_upstream_url
   end
 
   def fill_branch
     @branches = get_branch(name)
   end
 
+
+  def get_upstream_url
+   "http://rubygems.org/gems/#{gem_name}" 
+  end
 
   def get_kojiurl
    "http://koji.fedoraproject.org/koji/search?type=package&match=glob&terms=#{name}"
