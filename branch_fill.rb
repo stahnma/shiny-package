@@ -104,7 +104,7 @@ module BranchFill
     File.open('repoquery.conf').each do |line|
       if line =~ /^\[#{branch}/
         token = line.split('[')[1].delete(']').strip
-        enables << " --enablerepo=#{token}"
+        enables << " --repoid=#{token}"
       end
     end
 

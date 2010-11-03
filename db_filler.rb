@@ -54,7 +54,7 @@ end
 end
 
 
-names = [ 'rubygem-RedCloth'  ]
+names = [ 'rubygem-RedCloth', 'rubygem-rake', 'rubygem-rails', 'rubygem-linode', 'rubygem-rspec',   ]
 
 names.each do | name|
   do_the_needful(name)

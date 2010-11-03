@@ -3,6 +3,7 @@
 <table border=1>
 
 <tr>
+  <th>&nbsp;</th>
   <th>Package Name</th>
   <th>&nbsp;</th>
   <th>Gem Name</th>
@@ -15,6 +16,7 @@
 
 <% @packages.each do | pkg| -%>
 <tr> 
+  <td> s </td>
   <td><%= pkg.name -%></td>
   <td><a href="<%= pkg.upstream_url -%>"><img src=/images/rubygems.png alt="Upstream URL" title="Upstream URL"></a> </td>
   
@@ -24,7 +26,7 @@
   <% @iter.each do |i| -%>
     <% b = pkg.try(i, pkg.id) -%>
     <% unless b.nil? -%>
-       <td><%= b.version -%></td>
+       <td><%= b.version.split('-')[0] -%></td>
     <% else -%>
        <td>&nbsp;</td>
     <% end -%>
