@@ -1,10 +1,25 @@
 
+<html>
+<head>
+  
 
-<table border=1>
+<!-- <link rel="stylesheet" type="text/css" href="http://fedoraproject.org/static/css/fedora.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://fedoraproject.org/w/skins/fedora/main.css" media="screen"> -->
+
+</head>
+<body>
+
+<h1> 
+  Fedora Ruby SIG
+</h1>
+<table border=1 >
 
 <tr>
-  <th>&nbsp;</th>
+  <th> </th>
   <th>Package Name</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
   <th>&nbsp;</th>
   <th>Gem Name</th>
   <th>Upstream</th>
@@ -16,9 +31,12 @@
 
 <% @packages.each do | pkg| -%>
 <tr> 
-  <td> s </td>
+  <td><img src="/images/arrow.png"></td>
   <td><%= pkg.name -%></td>
   <td><a href="<%= pkg.upstream_url -%>"><img src=/images/rubygems.png alt="Upstream URL" title="Upstream URL"></a> </td>
+  <td><a href="<%= pkg.koji_url -%>"><img src=/images/koji.png alt="Koji URL" title="Koji URL"></a> </td>
+  <td><a href="<%= pkg.pkgdb_url -%>"><img src=/images/fedoraproject.png alt="PackageDB URL" title="PackageDB URL"></a> </td>
+  <td><a href="<%= pkg.bug_url -%>"><img src=/images/bz.png alt="Bug URL" title="Bug URL"></a> </td>
   
   <td><%= pkg.gem_name -%></td>
   <td><%= pkg.upstream_version -%></td>
@@ -36,3 +54,7 @@
 
 <% end -%>
 </table>
+
+
+</body>
+</html>

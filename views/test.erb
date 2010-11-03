@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  
+
+  <head>
+    
+	<link rel="stylesheet" type="text/css" media="all" href="http://fedoraproject.org/static/css/fedora.css">
+	<link rel="stylesheet" type="text/css" media="print" href="http://fedoraproject.org/static/css/print.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/static/css/start.fedora.css">
+	<link rel="shortcut icon" href="http://fedoraproject.org/static/images/favicon.ico" type="image/vnd.microsoft.icon">
+	<!--[if lt IE 7]>
+	<style type="text/css">
+		#wrapper
+		{
+			height: 100%;
+			overflow: visible!important;
+		}
+	</style>
+	<![endif]-->
+
+    
+	<script type="text/javascript" src="http://fedoraproject.org/static/js/banner.js"></script>
+	<!-- <script type="text/javascript" src="http://fedoraproject.org/static/js/release-counter.js?lang=en"></script> -->
+    <script type="text/javascript">
+		function init() {
+		   document.f.q.focus()
+		}
+    	window.onload = init;
+    </script>
+
+    <title>Fedora Project - Ruby Report</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      
+	<div id="head">
+		<h1><a href="http://fedoraproject.org/wiki/SIGs/Ruby">Fedora Ruby SIG</a></h1>
+	</div>
+
+      
+
+      <div id="content">
+
+<table border=1 >
+
+<tr>
+  <th> </th>
+  <th>Package Name</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+  <th>&nbsp;</th>
+  <th>Gem Name</th>
+  <th>Upstream</th>
+  <% @iter.each do |i| -%>
+    <th><%= i -%></th>
+  <% end -%>
+</tr>
+
+
+<% @packages.each do | pkg| -%>
+<tr>
+  <td><img src="/images/arrow.png"></td>
+  <td><%= pkg.name -%></td>
+  <td><a href="<%= pkg.upstream_url -%>"><img src=/images/rubygems.png alt="Upstream URL" title="Upstream URL"></a> </td>
+  <td><a href="<%= pkg.koji_url -%>"><img src=/images/koji.png alt="Koji URL" title="Koji URL"></a> </td>
+  <td><a href="<%= pkg.pkgdb_url -%>"><img src=/images/fedoraproject.png alt="PackageDB URL" title="PackageDB URL"></a> </td>
+  <td><a href="<%= pkg.bug_url -%>"><img src=/images/bz.png alt="Bug URL" title="Bug URL"></a> </td>
+
+  <td><%= pkg.gem_name -%></td>
+  <td><%= pkg.upstream_version -%></td>
+
+  <% @iter.each do |i| -%>
+    <% b = pkg.try(i, pkg.id) -%>
+    <% unless b.nil? -%>
+    <% if b.version.split('-')[0] == pkg.upstream_version -%>
+       <td><font color=green>
+    <% elsif b.version.split('-')[0]  != pkg.upstream_version -%> 
+       <td><font color=red>
+    <% else -%>
+       <td><font>
+     <% end -%>
+       <%= b.version.split('-')[0] -%></font></td>
+    <% else -%>
+       &nbsp;</font></td>
+    <% end -%>
+  <% end -%>
+
+
+
+<% end -%>
+</table>
+
+
+      </div>
+    </div>
+    
+    <div id="bottom">
+      <div id="footer">
+        <p class="copy">&copy; 2010 Red Hat, Inc. and others. Please send any comments or corrections to the <a href="mailto:webmaster@fedoraproject.org">websites team</a>.</p>
+        <p class="disclaimer">The Fedora Project is maintained and driven by the community and sponsored by Red Hat. This is a community maintained site. Red Hat is not responsible for content.</p>
+        <ul>
+          <li class="first"><a href="http://fedoraproject.org/wiki/Legal:Main">Legal</a></li>
+          <li><a href="http://fedoraproject.org/wiki/Legal:Trademark_guidelines">Trademark Guidelines</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </body>
+</html>

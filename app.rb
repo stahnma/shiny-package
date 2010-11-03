@@ -19,3 +19,10 @@ get '/' do
   puts @packages.size
   erb :index
 end
+
+
+get '/test' do 
+  @iter = [ 'devel', 'f14', 'f13', 'f12', 'el6', 'el5' ] 
+  @packages = Package.find(:all, :order => "name" )
+  erb :test
+end
