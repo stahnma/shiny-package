@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 require 'pp'
 
-module Branch
+module BranchFill
 
   def get_branch(name)
     json_name = "/tmp/json-#{name}"
@@ -22,6 +22,7 @@ module Branch
 
   def get_json(name, json_name)
     url = "https://admin.fedoraproject.org/pkgdb/acls/name/#{name}?tg_format=json"
+    puts url
     response = HTTParty.get(url)
     json =  response.body
     File.open(json_name, 'w') do | f|

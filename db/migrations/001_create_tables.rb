@@ -2,10 +2,11 @@
 class CreateTables < ActiveRecord::Migration
   def self.up
     create_table :packages do |t|
-      t.column :name, :string, :null => false
+      t.column :name, :string, :null => false, :unique => true
       t.column :bug_url, :string
       t.column :gem_name, :string, :null => false
       t.column :koji_url, :string
+      t.column :pkgdb_url, :string
       t.column :upstream_version, :string, :null => false
       t.timestamps
     end

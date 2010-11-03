@@ -1,9 +1,9 @@
 
-require 'branch'
+require 'branch_fill'
 
-class Package
+class PackageFill
  
-  include Branch
+  include BranchFill
 
   attr_reader :name, :branches, :pkgdburl, :gem_name, :upstream_version, :bugurl, :kojiurl
 
