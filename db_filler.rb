@@ -54,7 +54,9 @@ end
 end
 
 
-names = [ 'rubygem-RedCloth', 'rubygem-rake', 'rubygem-rails', 'rubygem-linode', 'rubygem-rspec',   ]
+#names = [ 'rubygem-RedCloth', 'rubygem-rake', 'rubygem-rails', 'rubygem-linode', 'rubygem-rspec',   ]
+#names = IO.read('all_gems').split
+names = [ 'rubygem-ParseTree'] 
 
 names.each do | name|
   do_the_needful(name)

@@ -4,10 +4,27 @@
 
   <head>
     
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#HiddenRowsNotice").html("<tr><td colspan='2'> <a href='#'>>> some rows hidden <<</a></td></tr>");
+                $("#ShowHide").html("<tr><td colspan='2'><a href='#'>show/hide middle rows</a></td></tr>");
+                $("#HiddenRows").hide();
+
+                $('#ShowHide,#HiddenRowsNotice').click( function() {
+                    $('#HiddenRows').toggle();  
+                        $('#HiddenRowsNotice').toggle();
+                });
+            });
+        </script>
+
 	<link rel="stylesheet" type="text/css" media="all" href="http://fedoraproject.org/static/css/fedora.css">
 	<link rel="stylesheet" type="text/css" media="print" href="http://fedoraproject.org/static/css/print.css">
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/start.fedora.css">
 	<link rel="shortcut icon" href="http://fedoraproject.org/static/images/favicon.ico" type="image/vnd.microsoft.icon">
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" type="text/javascript"></script>
+
 	<!--[if lt IE 7]>
 	<style type="text/css">
 		#wrapper
@@ -18,7 +35,6 @@
 	</style>
 	<![endif]-->
 
-    
 	<script type="text/javascript" src="http://fedoraproject.org/static/js/banner.js"></script>
 	<!-- <script type="text/javascript" src="http://fedoraproject.org/static/js/release-counter.js?lang=en"></script> -->
     <script type="text/javascript">
@@ -82,7 +98,7 @@
      <% end -%>
        <%= b.version.split('-')[0] -%></font></td>
     <% else -%>
-       &nbsp;</font></td>
+      <td> &nbsp;</font></td>
     <% end -%>
   <% end -%>
 
@@ -90,6 +106,8 @@
 
 <% end -%>
 </table>
+
+
 
 
       </div>
